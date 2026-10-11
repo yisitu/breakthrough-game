@@ -34,8 +34,10 @@ bool inBounds(int r, int c) {
 Board initialBoard() {
     Board b{};
     for (int c = 0; c < 8; ++c) {
+        b[idx(5, c)] = 1;   // White starts on rank 3
         b[idx(6, c)] = 1;   // White starts on rank 2
         b[idx(1, c)] = -1;  // Black starts on rank 7
+        b[idx(2, c)] = -1;  // Black starts on rank 6
     }
     return b;
 }
