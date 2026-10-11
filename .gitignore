@@ -1,0 +1,12 @@
+.aider*
+__pycache__/
+*.py[cod]
+*.o
+target/
+
+/breakthrough
+/breakthrough_cpp
+/breakthrough_rust
+/breakthrough_speed
+/breakthrough_speed_rust
+/leaderboard.json

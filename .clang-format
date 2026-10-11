@@ -1,0 +1,4 @@
+BasedOnStyle: Google
+InsertBraces: true
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortBlocksOnASingleLine: Never
