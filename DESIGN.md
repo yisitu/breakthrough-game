@@ -1,3 +1,4 @@
+```
 ┌────────────────────────────────────────────────────────┐
 │                   Tournament Engine                    │
 └───────────┬────────────────────────────────┬───────────┘
@@ -22,7 +23,7 @@ Harness (Python)                               CLI Bot Process
   │◄───── 2. Read STDOUT (UCI Move String) ───────────┤ (Outputs "e2e4\n")
   │                                                   │
   ├─ 3. Validate Move & Check 0.2s Timeout ───────────┤
-
+```
 
 1. Data Protocol Breakdown
 A. Harness to Bot (STDIN)
