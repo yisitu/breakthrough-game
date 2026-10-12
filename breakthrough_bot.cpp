@@ -53,6 +53,11 @@ constexpr uint16_t NO_MOVE = std::numeric_limits<uint16_t>::max();
 constexpr std::array<int, 8> ADVANCE = {0, 5, 14, 28, 50, 90, 180, 600};
 
 enum Bound : uint8_t { EXACT, LOWER, UPPER };
+enum SideIndex : size_t {
+    WHITE_SIDE = 0,
+    BLACK_SIDE = 1,
+    NUM_SIDES = 2
+};
 
 struct Position {
   uint64_t white = 0;
@@ -60,6 +65,7 @@ struct Position {
   uint64_t key = 0;
   int side = 1;
 };
+constexpr size_t NUM_SQUARES = 64;
 
 struct MoveList {
   // Sixteen pawns with at most three moves each bounds the list at 48.
@@ -81,7 +87,8 @@ struct TTEntry {
   Bound bound = EXACT;
 };
 
-std::array<std::array<uint64_t, 64>, 2> g_zobrist{};
+using ZobristTable = std::array<std::array<uint64_t, NUM_SQUARES>, NUM_SIDES>;
+ZobristTable g_zobrist{};
 uint64_t g_sideKey = 0;
 
 // SplitMix64 deterministically assigns independent-looking keys to each
@@ -130,13 +137,13 @@ uint64_t CalculateKey(const Position& position) {
   uint64_t pieces = position.white;
   while (pieces) {
     int square = __builtin_ctzll(pieces);
-    key ^= g_zobrist[0][square];
+    key ^= g_zobrist[WHITE_SIDE][square];
     pieces &= pieces - 1;
   }
   pieces = position.black;
   while (pieces) {
     int square = __builtin_ctzll(pieces);
-    key ^= g_zobrist[1][square];
+    key ^= g_zobrist[BLACK_SIDE][square];
     pieces &= pieces - 1;
   }
   return key;
